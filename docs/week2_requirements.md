@@ -2,19 +2,19 @@
 
 | Framing Element | Description |
 | :--- | :--- |
-| **Problem Evidence** | Public higher education bodies manage extensive scholarship guidelines across separate administrative portals, creating high inquiry volume and user navigation friction (MOHE Malaysia Guidelines: https://www.mohe.gov.my/). Unassisted LLMs suffer from hallucination risks when querying unindexed policy domains (Gao et al., 2023, arXiv:2312.10997). |
-| **Existing Approaches** | 1. Manual consultation with financial aid officers (limited by office hours).<br>2. Static PDF handbooks (fragmented, hard to search manually).<br>3. Generic LLMs (prone to hallucinating eligibility income caps). |
-| **Project/Engineering Gap** | Existing solutions lack natural-language query matching against exact policy clauses with verifiable citations, forcing students to manually filter dense financial PDFs. |
-| **Objective 01** | To design a document-grounded AI solution based on official university and foundation scholarship guidelines. |
-| **Objective 02** | To develop a retrieval system with clear guardrails that ensures all responses are grounded in official policy documents. |
-| **Objective 03** | To evaluate the system based on accuracy, eligibility grounding, latency, and resistance to ungrounded financial claims. |
-| **Intended Users** | Undergraduate and prospective university students searching for scholarships, bursaries, and financial aid options. |
-| **Supported Tasks** | Answering questions on scholarship eligibility, CGPA cutoffs, household income thresholds, required supporting documents, and application deadlines. |
-| **Information / Knowledge Domain** | Official institutional scholarship handbooks, endowed bursary guidelines, and public financial aid policy documents. |
-| **Operating Context** | Web-based student portal interface operating as an interactive Q&A assistant for academic advising. |
-| **Important Constraints** | Must run within standard API rate limits, support fast response times (<3000ms), and utilize publicly accessible PDF documents only. |
-| **Explicit Out-of-Scope Tasks** | Shall NOT grant final scholarship approvals, evaluate bank account statements, compute tax returns, or provide personal financial planning advice. |
-| **Evaluation Focus** | Determining whether retrieval-augmented generation improves citation accuracy and eliminates hallucinated eligibility criteria compared to base LLMs. |
+| **Problem Evidence** | The public higher education authorities have a wide range of scholarship regulations in different administrative portals, resulting in a large number of inquiries and difficulty navigating through those portals (MOHE Malaysia Guidelines: https://www.mohe.gov.my/). Unguided LLMs are subject to risks of hallucinations when accessing unindexed policy areas (Gao et al., 2023, arXiv:2312.10997). |
+| **Existing Approaches** | 1. Consultation with financial aid officers manually (subject to office hours).<br>2. Static PDF manuals (disjointed, difficult to search manually).<br>3. General LLMs (hallucinates income cap eligibility). |
+| **Project/Engineering Gap** | There is a need for a natural language query matching to actual policy clauses with references instead of forcing students to filter information from complex financial PDFs manually. |
+| **Objective 01** | To create an AI system for document-grounded queries using official guidelines for university and foundation scholarships. |
+| **Objective 02** | To create a retrieval system with well-defined guardrails ensuring that all answers are grounded in official policy documents. |
+| **Objective 03** | To test the system by such metrics as accuracy, grounding in eligibility, latency, and rejection of ungrounded financial assertions. |
+| **Target Audience** | Undergraduates and prospective university students seeking scholarships, bursaries, and financial aid. |
+| **Tasks** | Responding to inquiries regarding scholarship eligibility criteria, CGPA minimums, family income cutoffs, supporting documents, and application deadline dates. |
+| **Domain of Information/Knowledge** | Institutional scholarship guides, endowed bursary guidelines, and public financial aid policies. |
+| **Operational Context** | Web-based portal for academic advising running as an interactive Q&A agent. |
+| **Key Constraints** | Needs to be able to function within the API rate limits, perform at a reasonable speed (<3000ms), and access publicly available PDF documents only. |
+| **Explicitly Out-of-Scope Tasks** | Shall NOT approve scholarships, review bank account statements, calculate tax returns, and offer personal financial advice. |
+| **Focus of Evaluation** | Retrieval-augmented generation’s effect on citation accuracy and removal of invented eligibility criteria in comparison to base LLMs. |
 
 ---
 
