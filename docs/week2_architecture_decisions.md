@@ -37,9 +37,9 @@
 
 | Objective | Requirement ID | Evaluation Criterion | Architecture Element | Later Evidence |
 | :--- | :--- | :--- | :--- | :--- |
-| **O1** | FR1 / FR3 | Source Citation & Grounding | Document Loader, Vector Store (FAISS), Metadata Retriever | Automated test evaluating citation presence and page accuracy rate on 25 sample queries. |
-| **O2** | RAI2 / FR4 | Out-of-Scope Refusal | Input Scope & Safety Guardrail Filter | Execution of 20 out-of-scope test cases verifying refusal message and HTTP response code. |
-| **O3** | NFR1 / NFR2 | Response Latency & Correctness | RAG Engine, LLM Service, Evaluation Logger | Benchmarking script recording p90 end-to-end latency and rubric correctness scores across 30 queries. |
+| **1** | FR1 / FR3 | Source Citation & Grounding | Document Loader, Vector Store (FAISS), Metadata Retriever | Automated test evaluating citation presence and page accuracy rate on 25 sample queries. |
+| **2** | RAI2 / FR4 | Out-of-Scope Refusal | Input Scope & Safety Guardrail Filter | Execution of 20 out-of-scope test cases verifying refusal message and HTTP response code. |
+| **3** | NFR1 / NFR2 | Response Latency & Correctness | RAG Engine, LLM Service, Evaluation Logger | Benchmarking script recording p90 end-to-end latency and rubric correctness scores across 30 queries. |
 
 ---
 
