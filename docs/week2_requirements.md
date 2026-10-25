@@ -5,9 +5,9 @@
 | **Problem Evidence** | Public higher education bodies manage extensive scholarship guidelines across separate administrative portals, creating high inquiry volume and user navigation friction (MOHE Malaysia Guidelines: https://www.mohe.gov.my/). Unassisted LLMs suffer from hallucination risks when querying unindexed policy domains (Gao et al., 2023, arXiv:2312.10997). |
 | **Existing Approaches** | 1. Manual consultation with financial aid officers (limited by office hours).<br>2. Static PDF handbooks (fragmented, hard to search manually).<br>3. Generic LLMs (prone to hallucinating eligibility income caps). |
 | **Project/Engineering Gap** | Existing solutions lack natural-language query matching against exact policy clauses with verifiable citations, forcing students to manually filter dense financial PDFs. |
-| **Objective O1** | To design a document-grounded AI solution based on official university and foundation scholarship guidelines. |
-| **Objective O2** | To develop a retrieval system with clear guardrails that ensures all responses are grounded in official policy documents. |
-| **Objective O3** | To evaluate the system based on accuracy, eligibility grounding, latency, and resistance to ungrounded financial claims. |
+| **Objective 01** | To design a document-grounded AI solution based on official university and foundation scholarship guidelines. |
+| **Objective 02** | To develop a retrieval system with clear guardrails that ensures all responses are grounded in official policy documents. |
+| **Objective 03** | To evaluate the system based on accuracy, eligibility grounding, latency, and resistance to ungrounded financial claims. |
 | **Intended Users** | Undergraduate and prospective university students searching for scholarships, bursaries, and financial aid options. |
 | **Supported Tasks** | Answering questions on scholarship eligibility, CGPA cutoffs, household income thresholds, required supporting documents, and application deadlines. |
 | **Information / Knowledge Domain** | Official institutional scholarship handbooks, endowed bursary guidelines, and public financial aid policy documents. |
