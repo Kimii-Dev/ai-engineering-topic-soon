@@ -4,35 +4,35 @@
 **Domain:** Higher Education / Academic Administration
 
 ## Problem Statement
-Students entering or transferring into the Bachelor in Artificial Intelligence with Honours (SAIAH) at the UTM Faculty of Artificial Intelligence (FAI)—including diploma holders, direct-entry candidates, and cross-campus students—face delays evaluating credit exemptions, elective cluster alignment, and prerequisite dependencies. The 3-year degree structure (121 total credits) features 70% core AI content across complex courses (e.g., Python Programming, Mathematics for ML, Deep Learning, AI Engineering) and 4 elective clusters, making manual syllabus cross-referencing tedious and prone to registration errors. An AI engineering approach enables a document-grounded assistant that performs semantic syllabus matching and verifies credit exemption eligibility against official FAI regulations.
+The evaluation process is slow for students joining the Bachelor in Artificial Intelligence with Honours (SAIAH) program at UTM Faculty of Artificial Intelligence (FAI), who include diploma entry students, direct entry students and transfer students. The SAIAH program runs for three years and entails 121 credits, which is 70% AI-related content in complicated subjects such as Python Programming, Mathematics for ML, Deep Learning and AI Engineering with four elective clusters. This makes the syllabi comparison process difficult and can lead to enrollment problems. Through AI engineering, one is able to develop an assistant that does semantic syllabus matching and confirms exemption credit eligibility from the FAI regulations.
 
 ## Evidence of the Problem
-1. **Evidence 1:** According to the FAI Academic Handbook, credit exemption applications must be submitted within strict timeframes (by Week 10 of the first semester) and require detailed syllabus and transcript verification against UTM course standards.
-   * *Source/Citation:* UTM Faculty of Artificial Intelligence Academic Handbook 2025/2026, Page 42 (Credit Exemption & Credit Transfer).
-2. **Evidence 2:** Students who fail to manage their course registrations properly or fall into Conditional Status (KS, CGPA < 2.00) are strictly restricted to 9–13 credits per semester, while failure to register results in termination of study.
-   * *Source/Citation:* FAI Academic Handbook 2025/2026, Pages 42 & 45 (Credit Load Per Semester & Academic Standing).
+1. **Evidence 1:** The FAI Academic Handbook states that applications for credit exemptions should be made within tight deadlines (within Week 10 of the first semester) and that they have to go through verification of the syllabi and transcripts against UTM courses.
+   * *Source/Citation:* UTM Faculty of Artificial Intelligence Academic Handbook 2025/2026, p. 42 (Credit Exemption & Credit Transfer).
+2. **Evidence 2:** Those who do not control their course registration well or find themselves in Conditional Status (KS, CGPA < 2.00) are restricted to taking 9 to 13 units per semester, failing which can lead to termination of studies.
+   * *Source/Citation:* FAI Academic Handbook 2025/2026, pp. 42 & 45 (Credit Load Per Semester & Academic Standing).
 
 ## Initial Related Work / Existing Approaches
-1. **Study / Solution 1:** Manual Academic Advisor Consultations
-   * *Source / Citation:* UTM FAI Academic Advisory System.
-   * *Key Limitation:* Constrained by lecturer availability during peak course registration and add/drop windows.
-2. **Study / Solution 2:** Static PDF Academic Handbook Lookup
-   * *Source / Citation:* FAI Bachelor in Artificial Intelligence Academic Handbook 2025/2026.
-   * *Key Limitation:* Static PDF document requiring manual cross-referencing across 58 pages of course codes, prerequisites, and cluster lists.
-3. **Study / Solution 3:** Ungrounded Commercial LLMs (e.g., ChatGPT)
-   * *Source / Citation:* Standard commercial conversational AI tools.
-   * *Key Limitation:* High risk of hallucinating non-existent course codes, incorrect prerequisite chains, or unapproved credit transfer limits.
+1. **Study/Solution 1:** Manual Advisor Sessions
+   * *Source/Citation:* UTM FAI Academic Advisory System
+   * *Major Drawback:* Restricted by the availability of lecturers during high registration periods.
+2. **Study/Solution 2:** Static PDF of FAI Academic Handbook Search
+   * *Source/Citation:* FAI Bachelor in Artificial Intelligence Academic Handbook 2025/2026
+   * *Major Drawback:* Static PDF document that needs manual referencing across 58 pages containing course codes, prerequisites and clusters.
+3. **Study/Solution 3:** Untrained Commercial LLMs (ChatGPT)
+   * *Source/Citation:* Standard commercial conversational AI applications
+   * *Major Drawback:* Likelihood to hallucinate non-existing course codes, prerequisite chains and wrong credit transfer limits.
 
 ## Engineering Gap / Limitation
-Existing approaches either depend on limited human advisor office hours or static PDF guides that lack semantic search, while generic LLMs lack document grounding to enforce UTM FAI academic regulations and course prerequisite rules.
+Current methods rely on restricted access to human advisors office hours or static PDF manuals that do not offer semantic search capabilities, whereas generic LLMs fail to have document grounding to ensure UTM FAI academic and prerequisite rules.
 
 ## Initial Project Objectives
-* **O1:** To design a document-grounded AI solution that parses the UTM FAI Academic Handbook to evaluate external course syllabi against the SAIAH curriculum.
-* **O2:** To develop the proposed solution using vector retrieval (RAG) with policy-driven safety and scope guardrails.
-* **O3:** To evaluate system performance in terms of answer accuracy, policy groundedness, retrieval precision, and latency.
+* **O1:** Design a document-based AI solution to analyze the UTM FAI Academic Handbook and compare external courses syllabuses against the SAIAH curriculum.
+* **O2:** Develop the proposed solution using vector retrieval (RAG) with policy-oriented safety guardrails.
+* **O3:** Assess the performance of the developed system based on answer accuracy, policy grounding, retrieval precision and latency.
 
 ## Target Users
-Undergraduate AI students (SAIAH), diploma transfer candidates, international/exchange students, and FAI Academic Advisors.
+AI undergraduates (SAIAH), candidates for diploma transfers, exchange students and FAI Academic Advisors.
 
 ## Data Sources
 1. **Source 1:** UTM Faculty of Artificial Intelligence Academic Handbook 2025/2026 (Bachelor in Artificial Intelligence with Honours - SAIAH) PDF
@@ -43,10 +43,10 @@ Undergraduate AI students (SAIAH), diploma transfer candidates, international/ex
    * *URL:* `https://ugs.utm.my/utm-professional-skills-certificate-utm-psc/`
 
 ## Relation to EduAdvisor Benchmark
-* **Similar to EduAdvisor:** Employs Retrieval-Augmented Generation (RAG) over official academic PDF documents to eliminate hallucinated answers.
-* **Different from EduAdvisor:** Tailored specifically to the 3-year Bachelor in Artificial Intelligence (SAIAH) curriculum at UTM FAI, including 70% AI core subjects (SAIA 1113 to SAIA 3146), 4 specialized elective clusters (AI Advanced Algorithm, Robotic & Automation, AI in Business, Applied AI), and UTM GPA/CPA academic standing rules.
+**Similar to EduAdvisor:** Utilizes Retrieval-Augmented Generation (RAG) via the official academic PDF files to prevent any kind of hallucinations.
+**Difference from EduAdvisor:** Customized for the 3-year Bachelor of Artificial Intelligence program at UTM FAI, comprising 70% AI core subjects (SAIA 1113-SAIA 3146), 4 specialized elective groupings (AI Advanced Algorithms, Robotics & Automation, AI Business, AI Application) and UTM GPA/CPA system academic requirements.
 
 ## Responsible AI Risks
-* **Risk 1 (Hallucination):** Model invents an invalid credit transfer for a core AI subject (e.g., SAIA 2113 Machine Learning), leading a student to miss essential prerequisite knowledge.
-* **Risk 2 (Fairness):** Non-standard course titles from external polytechnics or international universities receive lower semantic matching scores.
-* **Risk 3 (Safety/Scope):** Student misinterprets system guidance as a binding administrative exemption; requires a guardrail enforcing pre-evaluation scope only.
+* **Risk 1 (Hallucination):** Model generates an invalid transfer of credit for a key AI subject (e.g., SAIA 2113 Machine Learning), causing a student to lack important prerequisite information.
+* **Risk 2 (Bias/Fairness):** Unusual names of courses from other polytechnics or international universities get low semantic match scores.
+* **Risk 3 (Safety/Scope):** Student misunderstands guidance from the system as an official exemption from evaluation which needs a guardrail to limit scope to pre-evaluation only.
