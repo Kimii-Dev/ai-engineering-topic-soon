@@ -33,4 +33,4 @@ Undergraduate AI students (SAIAH), diploma transfer candidates, and FAI Academic
 ## Weekly Progress
 | Week | Focus | Deliverable | Status |
 | :--- | :--- | :--- | :---: |
-| W1 | System map + project scope | README + docs | ☑ |
+| W1 | System map + project scope | README + docs | / |
