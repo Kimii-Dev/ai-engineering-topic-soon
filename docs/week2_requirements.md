@@ -5,9 +5,9 @@
 | **Problem Evidence** | 1. Credit exemption applications require strict syllabus and transcript verification against UTM course standards and must be submitted by Week 10 of Semester 1.<br>2. Students on Conditional Academic Standing (KS, CGPA < 2.00) are restricted to 9–13 credits per semester, while failure to register results in study termination (UTM FAI Academic Handbook 2025/2026, pp. 42 & 45). |
 | **Existing Approaches** | 1. *Manual Advisor Consultations:* Accurate, but bottlenecked by lecturer availability during peak registration weeks.<br>2. *Static PDF Handbook Search:* Official, but requires slow manual cross-referencing across 58 pages.<br>3. *Commercial LLMs (e.g., ChatGPT):* Flexible, but prone to hallucinating non-existent UTM course codes or prerequisite rules. |
 | **Project/Engineering Gap** | Existing approaches either rely on limited human advisor availability or static PDFs without semantic search, while generic LLMs lack document grounding to enforce UTM FAI academic regulations and prerequisite dependencies. |
-| **Objective O1** | To design a document-grounded AI solution that parses the UTM FAI Academic Handbook to evaluate external course syllabi against the SAIAH curriculum. |
-| **Objective O2** | To develop the proposed solution using vector retrieval (RAG) with policy-driven safety and scope guardrails. |
-| **Objective O3** | To evaluate system performance in terms of answer accuracy, policy groundedness, retrieval precision, and latency. |
+| **Objective 1** | To design a document-grounded AI solution that parses the UTM FAI Academic Handbook to evaluate external course syllabi against the SAIAH curriculum. |
+| **Objective 2** | To develop the proposed solution using vector retrieval (RAG) with policy-driven safety and scope guardrails. |
+| **Objective 3** | To evaluate system performance in terms of answer accuracy, policy groundedness, retrieval precision, and latency. |
 | **Intended Users** | SAIAH undergraduate AI students, diploma transfer candidates, cross-campus exchange students, and FAI Academic Advisors. |
 | **Supported Tasks** | Checking course syllabi equivalence, verifying prerequisite dependencies, checking credit exemption eligibility criteria, and clarifying credit load limits under academic standing rules. |
 | **Information / Knowledge Domain** | UTM FAI Academic Handbook 2025/2026 (SAIAH 3-year curriculum structure, 121 total credits, 70% AI core subjects, 4 elective clusters), UTM Academic Regulations for Full-Time Undergraduate Programmes, and UTM PSC guidelines. |
