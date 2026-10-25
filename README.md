@@ -1,36 +1,35 @@
-# BAI-ExemptAI - UTM AI Credit Transfer & Prerequisite Assistant
+# Scholarship Information Assistant ('AI-Finder-Scholarship')
 
-> Evaluates external course syllabi against the official UTM Faculty of Artificial Intelligence (FAI) handbook to provide document-grounded credit exemption and prerequisite guidance.
+> Answers student questions about scholarship eligibility, CGPA criteria, income thresholds and application deadlines, strictly grounded in official financial aid PDF documents.
 
 ## Problem Statement
-SAIAH students at UTM FAI experience weeks of delay while getting their credits evaluated for exemption and dependency on prerequisites due to information on course specifications, cluster options and credit requirements being dispersed over a 58-page booklet. This is where BAI-ExemptAI comes into play to provide prompt documentation-based assistance.
+Students struggle to navigate complex, fragmented scholarship handbooks to find financial aid they qualify for. 'AI-Finder-Scholarship' provides instant, document-grounded eligibility answers and application guidance 24/7.
 
 ## Evidence of the Problem
-- Syllabi must be compared strictly to UTM core AI courses for the purpose of credit exemptions, which are submitted at Week 10 of Semester 1.
-- Errors in course selection or unauthorized bypassing of prerequisites may lead to Conditional Academic Standing (KS).
+- Financial aid guidelines and eligibility terms are distributed across multiple official PDFs and government portals (Ministry of Higher Education Malaysia).
+- 
 
 ## Initial Related Work / Existing Approaches
-- **Manual Academic Advising:** Reliable but dependent on advisor availability during peak enrollment periods.
-- **Static Handbook Search:** Authoritative but inefficient for manual cross-referencing through all core classes and 4 electives.
-- **General Commercial LLMs:** Adaptable but liable to generating fictional UTM course codes, credit loads or grades ranges.
+- Human assistance with financial aid – context-aware, but constrained by limited operating times and overload of staff during busy times.
+- Website FAQ pages and PDF guides – accurate and reliable, but piecemeal and hard to find using personal criteria.
+- Generic AI assistants – versatile and context-aware, but unconnected to the official financial documents and prone to hallucinating.
 
 ## Engineering Gap / Limitation
-Current methods fail to provide a semantic and document-based RAG pipeline for comparing external syllabus results with UTM FAI Core AI requirements and regulations.
+Existing solutions lack natural-language query matching against exact policy clauses with verifiable citations, forcing students to manually filter dense financial PDFs.
 
 ## Project Objectives
-- **O1:** Create an AI credit exemption assistant using documents for UTM FAI.
-- **O2:** Implement the system using RAG (retrieval-augmented generation) with safety policies.
-- **O3:** Test groundedness of answers, retrieval quality, latency and safety.
+- O1: Develop an AI-based scholarship advising solution based on document knowledge.
+- O2: Implement the retrieval pipeline with safety guardrails and source citation techniques.
+- O3: Assess answer quality, eligibility correctness, latency and safety from hallucinations of policies.
 
 ## Target Users
-Undergraduate AI students (SAIAH), diploma transfer candidates and FAI Academic Advisors.
+Undergraduate and prospective university students searching for scholarships, bursaries and financial aid options.
 
 ## Data Sources
-- UTM Faculty of Artificial Intelligence Academic Handbook 2025/2026 (SAIAH) PDF (`https://fai.utm.my/undergraduate-registration-kit/`)
-- UTM Academic Regulations for Full-Time Undergraduate Programmes PDF (`https://ugs.utm.my/academic-rules/`)
-- UTM Professional Skill Certificate (UTM PSC) Guidelines PDF (`https://ugs.utm.my/utm-professional-skills-certificate-utm-psc/`)
+- University Undergraduate Scholarships and Financial Assistance Guide PDF
+- Guidelines for the Institutional Foundation Endowment Bursary PDF
 
 ## Weekly Progress
 | Week | Focus | Deliverable | Status |
 | :--- | :--- | :--- | :---: |
-| Week1 | System map + project scope | README + docs | / |
+| W1 | System map + project scope | README + docs | / |

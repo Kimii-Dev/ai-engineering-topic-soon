@@ -1,52 +1,41 @@
-# Project Scoping Document
+# Project Scope: AI Scholarship Information Assistant
 
-**Project Name:** BAI-ExemptAI - UTM AI Credit Transfer & Prerequisite Assistant  
-**Domain:** Higher Education / Academic Administration
+**Project Name:** AI-Finder-Scholarship
+**Domain:** Higher Education / Student Financial Services
 
 ## Problem Statement
-The evaluation process is slow for students joining the Bachelor in Artificial Intelligence with Honours (SAIAH) program at UTM Faculty of Artificial Intelligence (FAI), who include diploma entry students, direct entry students and transfer students. The SAIAH program runs for three years and entails 121 credits, which is 70% AI-related content in complicated subjects such as Python Programming, Mathematics for ML, Deep Learning and AI Engineering with four elective clusters. This makes the syllabi comparison process difficult and can lead to enrollment problems. Through AI engineering, one is able to develop an assistant that does semantic syllabus matching and confirms exemption credit eligibility from the FAI regulations.
+The rules for accessing higher education scholarships and financial aid are determined through complex processes of eligibility conditions, income levels, CGPA cutoffs and strict deadlines found within several PDF manuals. It is common for students to either miss application deadlines or apply for inappropriate scholarships because of lack of information. With AI engineering, an assistance program can be built to extract eligible opportunities based on a natural language query by users.
 
 ## Evidence of the Problem
-1. **Evidence 1:** The FAI Academic Handbook states that applications for credit exemptions should be made within tight deadlines (within Week 10 of the first semester) and that they have to go through verification of the syllabi and transcripts against UTM courses.
-   * *Source/Citation:* UTM Faculty of Artificial Intelligence Academic Handbook 2025/2026, p. 42 (Credit Exemption & Credit Transfer).
-2. **Evidence 2:** Those who do not control their course registration well or find themselves in Conditional Status (KS, CGPA < 2.00) are restricted to taking 9 to 13 units per semester, failing which can lead to termination of studies.
-   * *Source/Citation:* FAI Academic Handbook 2025/2026, pp. 42 & 45 (Credit Load Per Semester & Academic Standing).
+- Evidence 1: The public higher education bodies run huge scholarship and bursary guidelines in different administrative portals which lead to high query load and navigation problems.
+- Source / Citation: Financial Aid Guidelines & Student Services Directory from Ministry of Higher Education Malaysia
+- Evidence 2: 
 
-## Initial Related Work / Existing Approaches
-1. **Study/Solution 1:** Manual Advisor Sessions
-   * *Source/Citation:* UTM FAI Academic Advisory System
-   * *Major Drawback:* Restricted by the availability of lecturers during high registration periods.
-2. **Study/Solution 2:** Static PDF of FAI Academic Handbook Search
-   * *Source/Citation:* FAI Bachelor in Artificial Intelligence Academic Handbook 2025/2026
-   * *Major Drawback:* Static PDF document that needs manual referencing across 58 pages containing course codes, prerequisites and clusters.
-3. **Study/Solution 3:** Untrained Commercial LLMs (ChatGPT)
-   * *Source/Citation:* Standard commercial conversational AI applications
-   * *Major Drawback:* Likelihood to hallucinate non-existing course codes, prerequisite chains and wrong credit transfer limits.
+## Initial Related Work
+- Study / Solution 1: Manual consultation with university financial aid officers -> Limitation: Limited by office hours and slow response time during the application season.
+- Study / Solution 2: Printed PDFs for scholarships and noticeboards on website -> Limitation: Spread out over multiple platforms, cumbersome to search manually and difficult to overlook subtle qualifications for the applicants.
+- Study / Solution 3: Generic web/LLM search -> Limitation: Lack of verifiable basis from official guidelines and the risk of hallucinations for income ceilings and qualifications.
 
 ## Engineering Gap / Limitation
-Current methods rely on restricted access to human advisors office hours or static PDF manuals that do not offer semantic search capabilities, whereas generic LLMs fail to have document grounding to ensure UTM FAI academic and prerequisite rules.
+The available systems are either manually curated by filtering out documents or use generic AI models that are not grounded in any way and do not have citation capabilities.
 
 ## Initial Project Objectives
-* **O1:** Design a document-based AI solution to analyze the UTM FAI Academic Handbook and compare external courses syllabuses against the SAIAH curriculum.
-* **O2:** Develop the proposed solution using vector retrieval (RAG) with policy-oriented safety guardrails.
-* **O3:** Assess the performance of the developed system based on answer accuracy, policy grounding, retrieval precision and latency.
+- O1: Develop a document-based AI solution based on policies of the university and foundation for academic scholarship.
+- O2: Develop a retrieval system with clear guardrails that ensures all responses are grounded in the policies of acceptable documents.
+- O3: Assess the system based on measures of accuracy, eligibility grounding, latency and resistance to fraudulent financial claims.
 
 ## Target Users
-AI undergraduates (SAIAH), candidates for diploma transfers, exchange students and FAI Academic Advisors.
+Undergraduate and prospective university students searching for scholarships, bursaries and financial aid options.
 
 ## Data Sources
-1. **Source 1:** UTM Faculty of Artificial Intelligence Academic Handbook 2025/2026 (Bachelor in Artificial Intelligence with Honours - SAIAH) PDF
-   * *URL:* `https://fai.utm.my/undergraduate-registration-kit/`
-2. **Source 2:** UTM Academic Regulations for Full-Time Undergraduate Programmes PDF
-   * *URL:* `https://ugs.utm.my/academic-rules/`
-3. **Source 3:** UTM Professional Skill Certificate (UTM PSC) Guidelines PDF
-   * *URL:* `https://ugs.utm.my/utm-professional-skills-certificate-utm-psc/`
+- Source 1: University Undergraduate Scholarships and Financial Assistance Guide PDF
+- Source 2: Guidelines for the Institutional Foundation Endowment Bursary PDF
 
-## Relation to EduAdvisor Benchmark
-**Similar to EduAdvisor:** Utilizes Retrieval-Augmented Generation (RAG) via the official academic PDF files to prevent any kind of hallucinations.
-**Difference from EduAdvisor:** Customized for the 3-year Bachelor of Artificial Intelligence program at UTM FAI, comprising 70% AI core subjects (SAIA 1113-SAIA 3146), 4 specialized elective groupings (AI Advanced Algorithms, Robotics & Automation, AI Business, AI Application) and UTM GPA/CPA system academic requirements.
+## Differences from EduAdvisor
+- Similar to EduAdvisor: Has a document-based RAG framework which includes vector-based retrieval, metrics and safety guardrails.
+- Not similar to EduAdvisor: Is concerned with eligibility criteria related to finances, income limits of family members, CGPA criteria and deadline for awards.
 
 ## Responsible AI Risks
-* **Risk 1 (Hallucination):** Model generates an invalid transfer of credit for a key AI subject (e.g., SAIA 2113 Machine Learning), causing a student to lack important prerequisite information.
-* **Risk 2 (Bias/Fairness):** Unusual names of courses from other polytechnics or international universities get low semantic match scores.
-* **Risk 3 (Safety/Scope):** Student misunderstands guidance from the system as an official exemption from evaluation which needs a guardrail to limit scope to pre-evaluation only.
+- Risk 1 (Hallucination): The model generates imaginary scholarships awards, false income limits or false application deadlines, leading to the generation of invalid applications by the students.
+- Risk 2 (Fairness): Inadequate representation of certain niche bursary documents results in unequal distribution of retrieval effectiveness among diverse student populations.
+- Risk 3 (Safety Risk): Users enter personal financial information within their queries which the system must not record or reveal any identifiable financial data of users.
