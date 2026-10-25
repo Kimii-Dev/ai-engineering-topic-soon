@@ -36,7 +36,7 @@ AI undergraduates (SAIAH), candidates for diploma transfers, exchange students a
 
 ## Data Sources
 1. **Source 1:** UTM Faculty of Artificial Intelligence Academic Handbook 2025/2026 (Bachelor in Artificial Intelligence with Honours - SAIAH) PDF
-   * *URL:* `https://fai.utm.my/`
+   * *URL:* `https://fai.utm.my/undergraduate-registration-kit/`
 2. **Source 2:** UTM Academic Regulations for Full-Time Undergraduate Programmes PDF
    * *URL:* `https://ugs.utm.my/academic-rules/`
 3. **Source 3:** UTM Professional Skill Certificate (UTM PSC) Guidelines PDF
