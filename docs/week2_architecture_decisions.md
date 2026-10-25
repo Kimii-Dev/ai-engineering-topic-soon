@@ -1,48 +1,46 @@
-# Architecture Requirements Mapping & Decisions — BAI-ExemptAI
+# Section 1 — Requirements to Architecture Mapping
 
-## Section 1 — Architecture Needs Identification
-
-| Requirement ID | What does the requirement need? | Architecture Response |
+| Requirement ID | What is needed in the requirement? | Architecture Response |
 | :--- | :--- | :--- |
-| **FR1 / NFR2** | Access to up-to-date SAIAH 3-year curriculum, core course syllabi, and prerequisite rules. | Grounded Document Store & Retrieval Engine (Vector DB containing parsed handbook chunks). |
-| **FR3 / RAI4** | Answers must cite exact handbook source page numbers and sections. | Metadata Tracking Module attached to document loader and retriever pipeline. |
-| **RAI2 / FR4** | Non-academic queries (hostel, fees, visa) must be intercepted and refused. | Input Scope & Safety Guardrail filter placed before retriever execution. |
-| **NFR1** | End-to-end interactive response time must remain under 3 seconds. | Efficient vector indexing (FAISS) and lightweight embedding/LLM orchestration. |
-| **RAI3** | Zero student PII transmission to external model endpoints. | In-memory query sanitization layer prior to LLM invocation. |
+| **FR2 / RAI4** | Answers should provide verifiable citations and factual answers. | Vector Index & Retrieval Component for providing official document pieces as context. |
+| **RAI2** | Queries which do not fall within the scope or are not authorized should not be allowed. | Input Scope / Safety Control filter at the application entry point. |
+| **NFR2** | High accuracy in answering questions through the institutional PDF. | Document Data Pipeline (Loader, Cleaner, Chunker, Embedder) and Knowledge Store. |
+| **NFR1** | Response latency time should be less than 3,000 ms end-to-end. | Streamlined RAG pipeline with efficient vector retrieval and fast LLM inference service. |
 
 ---
 
-## Section 2 — Architecture Decision Records (ADR)
+# Section 2 — Architecture Decision Records (ADR)
 
-### Decision 1: Retrieval-Augmented Generation (RAG) vs. Model Fine-Tuning
-* **Requirement / Constraint:** FR1, FR3, NFR4, RAI4 (Must provide grounded answers with exact source citations and support rapid handbook updates).
-* **Alternatives Considered:** 
-  1. Base LLM prompt engineering only
-  2. Fine-tuning a domain LLM on handbook text
-  3. Retrieval-Augmented Generation (RAG) over vector embeddings
-* **Selected Option:** RAG over vector embeddings (FAISS / MiniLM embeddings).
-* **Trade-off Accepted:** Increased architectural complexity (vector storage and chunking pipeline), but guarantees factual grounding, exact page citations, and zero cost when updating handbooks.
+### Decision 1: Include Retrieval-Augmented Generation (RAG) Data Pipeline
+* **Requirement/Constraint:** FR1, FR2, RAI4 (All answers must be strictly based on official documents with citations).
+* **Options Considered:** 
+  1. Base LLM without retrieval (Uses only pre-trained knowledge).
+  2. Keyword Search for static keyword search providing PDF links.
+  3. Dynamic Knowledge Access (RAG) with Vector Store.
+* **Option Selected:** Dynamic Knowledge Access (RAG Pipeline).
+* **Compromise Made:** Increased architectural complexity and retrieval latency for no-hallucinations policy and verifiable citations.
 
-### Decision 2: Explicit Pre-Retrieval Guardrail vs. System Prompt Instruction Only
-* **Requirement / Constraint:** RAI2, FR4 (Out-of-scope queries must be reliably refused with $\ge 95\%$ success).
-* **Alternatives Considered:** 
-  1. Relying solely on system prompt refusal rules in the LLM
-  2. Dedicated pre-retrieval input guardrail component
-* **Selected Option:** Dedicated pre-retrieval input guardrail component (keyword/intent classifier).
-* **Trade-off Accepted:** Slight additional execution latency overhead (~50ms), but prevents unnecessary vector search / LLM API calls on out-of-scope queries while ensuring high safety reliability.
+### Decision 2: Implement Explicit Input/Output Scope Control
+* **Requirement/Constraint:** RAI2, FR4 (Queries which fall out-of-scope or are inappropriate have to be rejected).
+* **Options Discussed:**
+  1. Instructions through system prompt alone.
+  2. Scope/Safety Control module dedicated for this purpose.
+* **Option Selected:** Scope/Safety Control module at the application level.
+* **Trade-Off Agreed:** False positives in query rejection along with some latency overhead in favor of robust safety barriers for non-financial/non-harmful queries.
 
 ---
 
-## Section 3 — Initial Requirements Traceability Matrix
+# Section 3 — Requirements Traceability Matrix
 
-| Objective | Requirement ID | Evaluation Criterion | Architecture Element | Later Evidence |
+| Objective | Requirement | Evaluation Criterion | Architecture Element | Later Evidence |
 | :--- | :--- | :--- | :--- | :--- |
-| **1** | FR1 / FR3 | Source Citation & Grounding | Document Loader, Vector Store (FAISS), Metadata Retriever | Automated test evaluating citation presence and page accuracy rate on 25 sample queries. |
-| **2** | RAI2 / FR4 | Out-of-Scope Refusal | Input Scope & Safety Guardrail Filter | Execution of 20 out-of-scope test cases verifying refusal message and HTTP response code. |
-| **3** | NFR1 / NFR2 | Response Latency & Correctness | RAG Engine, LLM Service, Evaluation Logger | Benchmarking script recording p90 end-to-end latency and rubric correctness scores across 30 queries. |
+| **[01]** | FR2 / RAI4 | Source Citation and Grounding Match | Knowledge Source and Vector Index | Automatic detection of citation on 30 queries. |
+| **[02]** | RAI2 / FR4 | Out-of-Scope Refusal Ratio | Input Scope and Safety Control | Ratio of successful refusals on 20 safety tests. |
+| **[03]** | NFR1 / NFR2 | Response Latency and Correctness | Language Model Service and Evaluation Point | Logs of latency and correctness evaluation by experts. |
 
 ---
 
 ### Reflection
-*Which architecture decision involved the most important trade-off? Which requirement drove the decision, and what trade-off did you accept?*  
-**Answer:** **Decision 1 (RAG vs. Fine-Tuning)** involved the most important trade-off. It was driven by **RAI4 (Transparency/Grounding)** and **NFR4 (Maintainability)**. We accepted the trade-off of higher system architectural complexity (managing chunking strategies, embeddings, and vector stores) rather than simply calling a model API, because RAG is the only architecture that provides exact, verifiable page citations and allows instant handbook updates without expensive retraining.
+**Which architecture decision involved the most important trade-off? Which requirement drove the decision, and what trade-off did you accept?**
+
+*The implementation of a **dynamic knowledge access (RAG) pipeline** came at the cost of the most critical compromise. In accordance with **RAI4 (Transparency/Grounding)** and **FR2 (Source Citations)**, I made peace with a complex pipeline (including chunking, embeddings, vector database), along with increased retrieval time, in order to ensure the grounding of all financial statements in a reliable university PDF.*

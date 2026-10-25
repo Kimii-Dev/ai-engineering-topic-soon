@@ -1,15 +1,18 @@
-# Evaluation Criteria — BAI-ExemptAI
+# Evaluation Criteria — Scholarship Information Assistant
 
-| Objective / Requirement ID | Evaluation Criterion | Capability Bucket | Measurement Method | Metric | Threshold | User / Business Outcome |
+Version: 1.0
+
+| Objective / Requirement ID | Evaluation Criterion | Capability Bucket | Evaluation Method | Metric | Threshold | User / Business Outcome |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **3 / NFR2** | Answer Correctness | Domain-specific capability | Evaluate a test set of 25 SAIAH course and prerequisite queries against the handbook using a factual correctness rubric. | Correct response rate (%) | $\ge 85\%$ | Students receive accurate, trustworthy academic guidance for subject registration. |
-| **1 / FR3 / RAI4** | Source Citation & Grounding | Instruction-following capability | Inspect document-grounded responses for page citations and verify whether cited chunks support the generated statements. | Citation presence rate; Citation-source match rate | 100% citation presence; $\ge 95\%$ match rate | Students and advisors can independently verify every advice item directly against the PDF handbook. |
-| **2 / RAI2** | Out-of-Scope Refusal | Instruction-following capability | Test the system with a dataset of 20 out-of-scope (e.g., hostel fees, visa rules, grade overrides) queries. | Refusal-and-redirect success rate | $\ge 95\%$ | Prevents inappropriate advice and restricts tool usage strictly to academic syllabus scope. |
-| **3 / NFR1** | Response Latency | Cost and latency | Measure end-to-end response time from user query submission to complete output rendering across 30 queries. | p90 latency | < 3,000 ms | Ensures a fast, smooth interactive experience during peak course registration periods. |
-| **1 / FR5** | Guidance Clarity | Generation capability | Score response structure and readability on a 1–5 scale using a student usability rubric. | Average clarity rubric score | $\ge 4.0 / 5.0$ | Students can easily understand credit rules and syllabus comparisons without confusion. |
+| **O3 / NFR2** | Policy Answer Correctness | Domain-specific capability | Assess a test set of 30 common eligibility query cases against ground-truth PDF rules. | Accuracy of responses (%) | ≥ 85% | Students get reliable advice about financial aid policies. |
+| **O1 / FR2 / RAI4** | Source Citation & Grounding Check | Instruction-following capability | Check outputs for citation tags, match with source document chunks. | Citation inclusion rate which matching rate | 100% inclusion which ≥ 95% match | Students will be able to check the correctness of the policy rules against official PDF of the university. |
+| **O2 / RAI2** | Out-of-Scope Queries Refusal | Instruction-following capability | Test the system with 20 out-of-scope queries (e.g. loan scam, registration). | Refusal rate (%) | ≥ 95% | Protection against making mistakes in financial matterswhich prevents abuse of the system. |
+| **O3 / NFR1** | Response latency | Cost and latency | Calculate the total processing time through the entire evaluation workload. | p90 latency | < 3,000 ms | Assures that the system provides a good user experience for students portals. |
+| **O1 / FR5** | Response clarity | Generation capability | Rate response clarity and formatting based on a specific rubric (scale of 1-5). | Average clarity score | ≥ 4.0 / 5.0 | The students understand income criteria and application process. |
 
 ---
 
 ### Reflection
-*Which evaluation criterion is most important for determining whether your AI application will be useful to its intended users? Why?*  
-**Answer:** **Source Citation & Grounding (O1 / FR3 / RAI4)** is the most critical evaluation criterion. Academic credit transfer and prerequisite planning carry official administrative weight. If the assistant provides an accurate summary but cannot prove its source with precise handbook page references, advisors and students will not trust or adopt the tool. Verifiable citations bridge the gap between AI generation and official university policy enforcement.
+**Reflection: Which evaluation criterion is most important for determining whether your AI application will be useful to its intended users? Why?**
+
+*The **Source Citation & Grounding Match (RAI4)** criterion is the most important. As applications for financial assistance are tied to certain deadline constraints and the cutoff date for eligibility, a fictitious criterion will definitely put a student at risk of losing his or her scholarship or filling out an application that won't be counted. Full 100% citation presence with valid sources matches makes everything transparent and credible for students.*
