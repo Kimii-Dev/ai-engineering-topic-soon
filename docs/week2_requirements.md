@@ -2,59 +2,52 @@
 
 | Framing Element | Description |
 | :--- | :--- |
-| **Problem Evidence** | 1. Credit exemption applications require strict syllabus and transcript verification against UTM course standards and must be submitted by Week 10 of Semester 1.<br>2. Students on Conditional Academic Standing (KS, CGPA < 2.00) are restricted to 9–13 credits per semester, while failure to register results in study termination (UTM FAI Academic Handbook 2025/2026, pp. 42 & 45). |
-| **Existing Approaches** | 1. *Manual Advisor Consultations:* Accurate, but bottlenecked by lecturer availability during peak registration weeks.<br>2. *Static PDF Handbook Search:* Official, but requires slow manual cross-referencing across 58 pages.<br>3. *Commercial LLMs (e.g., ChatGPT):* Flexible, but prone to hallucinating non-existent UTM course codes or prerequisite rules. |
-| **Project/Engineering Gap** | Existing approaches either rely on limited human advisor availability or static PDFs without semantic search, while generic LLMs lack document grounding to enforce UTM FAI academic regulations and prerequisite dependencies. |
-| **Objective 1** | To design a document-grounded AI solution that parses the UTM FAI Academic Handbook to evaluate external course syllabi against the SAIAH curriculum. |
-| **Objective 2** | To develop the proposed solution using vector retrieval (RAG) with policy-driven safety and scope guardrails. |
-| **Objective 3** | To evaluate system performance in terms of answer accuracy, policy groundedness, retrieval precision, and latency. |
-| **Intended Users** | SAIAH undergraduate AI students, diploma transfer candidates, cross-campus exchange students, and FAI Academic Advisors. |
-| **Supported Tasks** | Checking course syllabi equivalence, verifying prerequisite dependencies, checking credit exemption eligibility criteria, and clarifying credit load limits under academic standing rules. |
-| **Information / Knowledge Domain** | UTM FAI Academic Handbook 2025/2026 (SAIAH 3-year curriculum structure, 121 total credits, 70% AI core subjects, 4 elective clusters), UTM Academic Regulations for Full-Time Undergraduate Programmes, and UTM PSC guidelines. |
-| **Operating Context** | Browser-based interactive conversational tool used by students and advisors during pre-registration, orientation, and credit transfer windows. |
-| **Important Constraints** | Must run within low compute overhead, rely strictly on approved university PDF documents, and adhere to zero student PII storage policies. |
-| **Explicit Out-of-Scope Tasks** | Making legally binding credit transfer decisions, approving prerequisite waiver forms, providing financial/hostel/visa advice, or overriding academic standing status. |
-| **Evaluation Focus** | Whether the RAG pipeline produces factually grounded answers with exact source page citations while successfully blocking out-of-scope or non-academic queries. |
+| **Problem Evidence** | Public higher education bodies manage extensive scholarship guidelines across separate administrative portals, creating high inquiry volume and user navigation friction (MOHE Malaysia Guidelines: https://www.mohe.gov.my/). Unassisted LLMs suffer from hallucination risks when querying unindexed policy domains (Gao et al., 2023, arXiv:2312.10997). |
+| **Existing Approaches** | 1. Manual consultation with financial aid officers (limited by office hours).<br>2. Static PDF handbooks (fragmented, hard to search manually).<br>3. Generic LLMs (prone to hallucinating eligibility income caps). |
+| **Project/Engineering Gap** | Existing solutions lack natural-language query matching against exact policy clauses with verifiable citations, forcing students to manually filter dense financial PDFs. |
+| **Objective O1** | To design a document-grounded AI solution based on official university and foundation scholarship guidelines. |
+| **Objective O2** | To develop a retrieval system with clear guardrails that ensures all responses are grounded in official policy documents. |
+| **Objective O3** | To evaluate the system based on accuracy, eligibility grounding, latency, and resistance to ungrounded financial claims. |
+| **Intended Users** | Undergraduate and prospective university students searching for scholarships, bursaries, and financial aid options. |
+| **Supported Tasks** | Answering questions on scholarship eligibility, CGPA cutoffs, household income thresholds, required supporting documents, and application deadlines. |
+| **Information / Knowledge Domain** | Official institutional scholarship handbooks, endowed bursary guidelines, and public financial aid policy documents. |
+| **Operating Context** | Web-based student portal interface operating as an interactive Q&A assistant for academic advising. |
+| **Important Constraints** | Must run within standard API rate limits, support fast response times (<3000ms), and utilize publicly accessible PDF documents only. |
+| **Explicit Out-of-Scope Tasks** | Shall NOT grant final scholarship approvals, evaluate bank account statements, compute tax returns, or provide personal financial planning advice. |
+| **Evaluation Focus** | Determining whether retrieval-augmented generation improves citation accuracy and eliminates hallucinated eligibility criteria compared to base LLMs. |
 
 ---
 
-# Requirements Specification — BAI-ExemptAI
-Version: 1.0
+# Section 1 — Functional Requirements Specification
 
-## Section 1 — Functional Requirements (FR)
+Version: 1.0
 
 | # | Requirement — The system SHALL | Scope Boundary — SHALL NOT (where relevant) |
 | :--- | :--- | :--- |
-| **FR1** | Answer queries regarding course codes, credit hours, prerequisites, and syllabus content from the official SAIAH curriculum. | Invent course codes or syllabus details not present in the source handbook. |
-| **FR2** | Provide explicit credit exemption eligibility criteria and submission deadlines based on UTM FAI regulations. | Guarantee or grant official administrative credit exemptions to a student. |
-| **FR3** | Include precise source document references (e.g., page numbers and section headers) for all retrieved academic advice. | Present general model knowledge as official university policy without citation. |
-| **FR4** | Detect and refuse non-academic queries (e.g., hostel fees, parking permits, visa rules) and provide an appropriate redirect. | Provide financial, legal, medical, or non-academic administrative guidance. |
-| **FR5** | Present credit transfer evaluations in clear, structured formats suitable for undergraduate students and advisors. | Use ambiguous administrative jargon or ungrounded speculative feedback. |
+| **FR1** | Answer queries regarding scholarship eligibility criteria, CGPA cutoffs, and income thresholds using official policy documents. | Invent scholarship names, CGPA requirements, or eligibility rules not present in the source documents. |
+| **FR2** | Provide direct verifiable source citations (document title and page/section) for all policy claims. | Present unverified general financial advice as an approved university policy. |
+| **FR3** | Retrieve and summarize application submission deadlines and required supporting document lists. | Automatically submit scholarship applications on behalf of the student. |
+| **FR4** | Decline out-of-scope queries (e.g., career advice, course enrollment, personal loans) and provide an appropriate redirect. | Offer legal, tax, personal financial planning, or mental health counselling advice. |
+| **FR5** | Present eligibility summaries in clear, concise language accessible to undergraduate students. | Make final binding decisions on scholarship award approvals or rejections. |
 
 ---
 
-## Section 2 — Non-Functional Requirements (NFR)
+# Section 2 — Non-Functional Requirements Specification
 
 | # | Quality Attribute | Requirement | Measurement Method | Metric | Threshold |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **NFR1** | Performance | The system shall keep interactive user query responses within the agreed latency target. | Measure end-to-end response time across a test workload of 30 queries. | p90 latency | < 3,000 ms |
-| **NFR2** | Correctness | Academic advice and prerequisite rules shall be factually consistent with the handbook. | Score a curated test dataset of 25 domain questions using an evaluation rubric. | Correct response rate (%) | $\ge 85\%$ |
-| **NFR3** | Cost | Inference cost shall remain within the student project budget. | Record model API usage over a 100-query evaluation workload. | Cost per 100 queries | < US$0.20 per 100 queries |
-| **NFR4** | Maintainability | Handbook updates shall be incorporated without re-engineering application logic. | Re-index an updated PDF source and run an automated retrieval test. | Index update time | < 10 min |
+| **NFR1** | Performance | The system shall keep interactive responses within the agreed latency target. | Measure end-to-end latency from query submission to final response generation across a 30-query test set. | p90 latency | < 3,000 ms |
+| **NFR2** | Correctness | Answers shall be factually consistent with approved source documents. | Score a curated test dataset of 30 standard financial aid questions using an expert evaluation rubric. | Correct response rate (%) | ≥ 85% |
+| **NFR3** | Cost | Inference and embedding API costs shall remain within project budget constraints. | Record API token consumption across the evaluation workload. | Cost per 100 queries | < US$0.50 per 100 queries |
+| **NFR4** | Maintainability | Updated scholarship PDF documents shall be indexed without rebuilding unrelated pipeline components. | Measure the execution time required to parse, chunk, embed, and re-index a newly published policy PDF. | Index update time | < 10 minutes |
 
 ---
 
-## Section 3 — Responsible AI Requirements (RAI)
+# Section 3 — Responsible AI Requirements Specification
 
 | # | Responsible AI Risk | Requirement | Measurement Method | Metric | Threshold |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **RAI1** | Fairness | Evaluation accuracy shall not significantly vary between core AI subjects and elective cluster subjects. | Compare correctness rates across core AI modules vs. 4 elective clusters on a test set. | Accuracy gap between course types | $\le 10$ percentage points |
-| **RAI2** | Safety/Scope | The system shall refuse out-of-scope queries and enforce guidance-only behavior. | Execute a test set containing 20 out-of-scope and administrative override queries. | Refusal-and-redirect success rate | $\ge 95\%$ |
-| **RAI3** | Privacy | The system shall not transmit or retain student PII (e.g., Matric numbers, grades). | Inspect outgoing API payloads during interactive query sessions. | Number of detected PII transmissions | 0 |
-| **RAI4** | Transparency / Grounding | The system shall provide verifiable source citations for grounded answers and declare when source evidence is lacking. | Inspect responses for citation presence and verify whether cited sources support the text. | Citation presence rate; Citation-source match rate | 100% citation presence; $\ge 95\%$ match rate |
-
----
-
-### Reflection
-*Which Responsible AI requirement in your project will be the most difficult to measure or enforce technically? Why?*  
-**Answer:** **RAI4 (Transparency / Grounding)** will be the most difficult to enforce technically. While checking for citation presence is straightforward via regex, validating whether the cited handbook chunk *truthfully supports* the generated answer (citation-source match) requires semantic evaluation or an LLM-as-a-judge setup. Ensuring zero hallucination while comparing complex prerequisite dependencies across multiple pages requires precise chunking and high-precision vector retrieval.
+| **RAI1** | Fairness | System answer correctness shall not vary significantly across different student income categories or study faculties. | Evaluate a stratified test set of queries across STEM, Arts, and B40/M40 income categories. | Absolute correctness rate gap between groups | ≤ 10 percentage points |
+| **RAI2** | Safety / Scope | The system shall refuse out-of-scope or malicious queries (e.g., tax evasion, loan fraud) and redirect users appropriately. | Run a safety evaluation dataset containing at least 20 out-of-scope and prompt-injection queries. | Refusal-and-redirect success rate | ≥ 95% |
+| **RAI3** | Privacy | The system shall not store or transmit student personally identifiable information (PII) to external model APIs. | Inspect outgoing API payloads for IC/Passport numbers, bank accounts, or phone numbers. | Number of detected PII transmissions | 0 |
+| **RAI4** | Transparency / Grounding | The system shall provide verifiable source citations for all claims and indicate when sufficient context is missing. | Inspect generated responses for citation presence and verify citation-to-source grounding match. | Citation presence rate; citation-source match rate | 100% citation presence; ≥ 95% source match |

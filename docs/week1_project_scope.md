@@ -4,7 +4,7 @@
 **Domain:** Higher Education / Student Financial Services
 
 ## Problem Statement
-The rules for accessing higher education scholarships and financial aid are determined through complex processes of eligibility conditions, income levels, CGPA cutoffs and strict deadlines found within several PDF manuals. It is common for students to either miss application deadlines or apply for inappropriate scholarships because of lack of information. With AI engineering, an assistance program can be built to extract eligible opportunities based on a natural language query by users.
+The rules for accessing higher education scholarships and financial aid are determined through complex processes of eligibility conditions, income level, CGPA cutoffs and strict deadlines found within several PDF manuals. It is common for students to either miss application deadlines or apply for inappropriate scholarships because of lack of information. With AI engineering, an assistance program can be built to extract eligible opportunities based on a natural language query by users.
 
 ## Evidence of the Problem
 - Evidence 1: The public higher education bodies run huge scholarship and bursary guidelines in different administrative portals which lead to high query load and navigation problems.
